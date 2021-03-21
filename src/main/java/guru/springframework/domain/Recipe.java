@@ -1,12 +1,7 @@
 package guru.springframework.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
 public class Recipe {
@@ -22,6 +17,9 @@ public class Recipe {
 	private String source;
 	private String url;
 	private String directions;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	private Set<Ingredients> ingredients;
 	
 	@Lob
 	private byte[] image;

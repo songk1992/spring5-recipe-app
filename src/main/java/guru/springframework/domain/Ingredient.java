@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import javax.persistence.*;
 
 @Entity
-public class Ingredients {
-
+public class Ingredient {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String desctiption;
+	private String description;
 	private BigDecimal amount;
 	
 	@ManyToOne
@@ -18,6 +18,13 @@ public class Ingredients {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure uom;
 
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+        this.recipe = recipe;
+    }
+	
 	public Long getId() {
 		return id;
 	}
@@ -27,11 +34,11 @@ public class Ingredients {
 	}
 
 	public String getDesctiption() {
-		return desctiption;
+		return description;
 	}
 
-	public void setDesctiption(String desctiption) {
-		this.desctiption = desctiption;
+	public void setDesctiption(String description) {
+		this.description = description;
 	}
 
 	public BigDecimal getAmount() {
